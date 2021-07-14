@@ -18,6 +18,7 @@ style = style_from_dict({
 })
 
 
+# for coloring of outputs and figlet arts
 def pyfiglet(string, color, font=True):
     if font:
         f = Figlet(font='standard')
@@ -27,6 +28,7 @@ def pyfiglet(string, color, font=True):
         print(text)
 
 
+# for email validation
 class email_validator(Validator):
     pattern = r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?"
 
@@ -44,6 +46,7 @@ class email_validator(Validator):
                 cursor_position=len(email.text))
 
 
+# for is there any blank inputs
 class empty_validator(Validator):
     def validate(self, document):
         if len(document.text):
@@ -54,6 +57,7 @@ class empty_validator(Validator):
                 cursor_position=len(document.text))
 
 
+# for sending email on the basis of user inputs
 def send_mail(emails):
     from_email = emails.get('from_email')
     from_pass = emails.get('password_from_email')
@@ -67,6 +71,7 @@ def send_mail(emails):
     server.sendmail(from_email, to_email, message)
 
 
+# for setting path
 class path_validator(Validator):
     def validate(self, value):
         if len(value.text):
@@ -82,6 +87,7 @@ class path_validator(Validator):
                 cursor_position=len(value.text))
 
 
+# to prompt for to collecting details from users
 def email_details():
     details = [
         {
@@ -156,6 +162,7 @@ def email_details():
     return answer
 
 
+# main method
 @click.command()
 def main():
     pyfiglet("Email  CLI", 'red')
