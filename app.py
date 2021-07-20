@@ -6,6 +6,7 @@ import re
 import os
 import click
 import smtplib
+import getpass
 
 style = style_from_dict({
     Token.QuestionMark: '#fac731 bold',
@@ -46,7 +47,7 @@ class email_validator(Validator):
                 cursor_position=len(email.text))
 
 
-# for is there any blank inputs
+# for finding any blank inputs
 class empty_validator(Validator):
     def validate(self, document):
         if len(document.text):
@@ -88,6 +89,8 @@ class path_validator(Validator):
 
 
 # to prompt for to collecting details from users
+
+
 def email_details():
     details = [
         {
@@ -96,11 +99,13 @@ def email_details():
             'message': 'enter from email :',
             'validate': email_validator
         },
+
         {
-            'type': 'input',
+            'type': 'password',
             'name': 'password_from_email',
-            'message': 'enter password of from email :',
-            'validate': empty_validator
+            'message': 'enter senders password',
+            'validate': empty_validator,
+
         },
         {
             'type': 'input',
